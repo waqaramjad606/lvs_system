@@ -34,6 +34,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/profile', [\App\Http\Controllers\DashboardController::class,'user_Profile'])->name('profile');
     Route::post('/updateProfile', [\App\Http\Controllers\DashboardController::class,'editProfile'])->name('profile.update');
     Route::get('/loan_application', [\App\Http\Controllers\DashboardController::class,'loan_application_page'])->name('dashboard.loan_application');
+    Route::post('/accept_application', [\App\Http\Controllers\DashboardController::class,'accpetApplication'])->name('dashboard.accept_application');
+    Route::post('/reject_application', [\App\Http\Controllers\DashboardController::class,'rejectApplication'])->name('dashboard.reject_application');
 });
 
 Auth::routes();

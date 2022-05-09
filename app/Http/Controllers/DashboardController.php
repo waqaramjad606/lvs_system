@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Application;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -46,7 +47,8 @@ class DashboardController extends Controller
 
     public function loan_application_page()
     {
-        return view('loan_applications');
+        $applications = Application::all();
+        return view('loan_applications',compact('applications'));
     }
 
     public function apply_application()
@@ -66,6 +68,24 @@ class DashboardController extends Controller
         $application->permanent_address = $request->input('permanentaddress');
         $application->save();
         return redirect()->route('apply_application')->with('success', 'Application apply successfully!');
+    }
+
+    public function accpetApplication(Request $request)
+    {
+        $application = Application::find($request->id);
+        $application->status=1;
+        $application->save();
+        return response()->json("true");
+//        return redirect()->route('dashboard.loan_application')->with('success', 'Application approved successfully');
+    }
+
+    public function rejectApplication(Request $request)
+    {
+        $application = Application::find($request->id);
+        $application->status=2;
+        $application->save();
+        return response()->json("true");
+//        return redirect()->route('dashboard.loan_application')->with('success', 'Application rejected successfully');
     }
 
 
