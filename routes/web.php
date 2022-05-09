@@ -17,9 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [\App\Http\Controllers\Controller::class,'index'])->name('home');
-Route::get('/user_dashboard', [\App\Http\Controllers\Controller::class,'login_Page'])->name('user_dashboard');
+//Route::get('/home', [\App\Http\Controllers\Controller::class,'index'])->name('home');
+Route::get('/', [\App\Http\Controllers\Controller::class,'index'])->name('home');
+Route::get('/track', [\App\Http\Controllers\Controller::class,'track_page'])->name('track');
+Route::get('/verification', [\App\Http\Controllers\Controller::class,'verification_page'])->name('verification');
+Route::get('/about', [\App\Http\Controllers\Controller::class,'about_page'])->name('about');
 Route::post('/postLogin', [\App\Http\Controllers\Auth\LoginController::class,'postLogin'])->name('login.post');
+Route::post('/application_status', [\App\Http\Controllers\Controller::class,'track_application'])->name('application_status');
 Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 
@@ -40,4 +44,4 @@ Route::group(['middleware' => ['admin']], function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

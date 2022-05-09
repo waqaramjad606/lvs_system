@@ -63,8 +63,8 @@
                                     <label class="my-2">Email</label>
                                     <input type="email" class="form-control" name="email" value="{{ $user->email }}">
 
-                                    <label class="my-2">CNIC NO</label>
-                                    <input type="text" class="form-control" name="cnic_no" value="{{ $user->cnic_no }}">
+{{--                                    <label class="my-2">CNIC NO</label>--}}
+{{--                                    <input type="text" class="form-control" name="cnic_no" value="{{ $user->cnic_no }}">--}}
 
                                     <div class="col-12 text-center my-4">
                                         <button type="submit" class="btn btn-success" >Update</button>

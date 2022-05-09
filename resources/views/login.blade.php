@@ -1,218 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="stylesheet" href="{{  asset('lvs_assets/css/bootstrap.min.css') }}">
-    <!--  <link rel="stylesheet" href="css/styl.css"> -->
-    <link rel="stylesheet" href="{{  asset('lvs_assets/css/verify.css') }}">
-    <!--       <link rel="stylesheet" href="css/style.css"> -->
-    <link rel="stylesheet" href="{{  asset('lvs_assets/css/responsive.css') }}">
-
+	<title>Login V16</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ asset('lvs_assets/images/icons/favicon.ico') }}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('public/lvs_assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/vendor/animate/animate.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/vendor/css-hamburgers/hamburgers.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/vendor/animsition/css/animsition.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/vendor/select2/select2.min.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/vendor/daterangepicker/daterangepicker.css') }}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('lvs_assets/css/main.css') }}">
+<!--===============================================================================================-->
 </head>
+<body>
 
-<body class="main-layout">
-<!--       <div class="loader_bg">
-         <div class="loader"><img src="images/loading.gif" alt="" /></div>
-      </div> -->
-<header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 logo_section">
-                <div class="full">
-                    <div class="center-desk">
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url(' {{ asset('lvs_assets/images/bg-01.jpg') }}}');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">
+					Account Login
+				</span>
+				<form class="login100-form validate-form p-b-33 p-t-5">
 
-                        <div class="logo" style="width: 50%; height: 50%;"><p></p> <a href="Home.blade.php">
-                                <img src="{{ asset('lvs_assets/images/logo.png') }} " alt="#"></a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="menu-area">
-                    <div class="limit-box">
-                        <nav class="main-menu">
-                            <ul class="menu-area-main">
-                                <li>
-                                    <a href="{{ route('home') }}">Home</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('apply_application') }}">Loan Application</a>
-                                </li>
-                                <li>
-                                    <a href="Track.html">Track Application</a>
-                                </li>
-                                <li>
-                                    <a href="verification.html">Verification</a>
-                                </li>
-                                <li>
-                                    <a href="about.html">About us</a>
-                                </li>
-                                <li class="active">
-                                    <a href="login.html">Login</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="User name">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="container-login100-form-btn m-t-32">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header" style="color: black; font-size: 20px; text-align: center;">
-                    Enter Login Details
-                </div>
-                @if(Session::has('error'))
-                    <div class="alert alert-danger text-center">
-                        <strong>{{ session('error') }}</strong>
-                    </div>
-                @endif
+	<div id="dropDownSelect1"></div>
 
-                @if(Session::has('registration_success'))
-                    <div class="alert alert-success text-center">
-                        <strong>{{ session('registration_success') }}</strong>
-                    </div>
-                @endif
-
-                <form method="post" action="{{ route('login.post') }}">
-                    @csrf
-                    <div class="card-body" style="align-items: center">
-                        <input class="form-control{{ $errors->has('cnic_no') ? ' is-invalid' : '' }}" type="text" name="cnic_no" id="cnic_no" placeholder="Enter Cnic Number">
-
-
-                        @if ($errors->has('cnic_no'))
-                            <span class="invalid-feedback">
-                                <strong>{{ $errors->first('cnic_no') }}</strong>
-                            </span>
-                        @endif
-
-                        <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" type="text" name="password" id="password" placeholder="Enter Password">
-
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="card-footer" style="align-items: center;">
-                        <button type="Submit" style="width: 45%; margin-left: 10px;" class="btn btn-success">Submit</button>
-                        <button type="reset" style="width: 45%; margin-left: 10px;" class="btn btn-danger">Cancel</button>
-                    </div>
-
-                    <div class="card-footer" style="align-items: center; font-size: 15px;">
-                        <a href="forget.html">Forget Password</a>
-                        <a class="a" href="register.html">Don't Have Account</a>
-                    </div>
-                </form>
-
-            </div>
-
-
-        </div>
-        <div class="col-md-3"></div>
-    </div>
-</div>
-
-
-<br><br><br><br><br><br><br>
-
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <h3 style="color:white; font-size: 20px;">Contact Information</h3>
-                <ul class="contact_information">
-                    <li><span><img src="images/location_icon.png" alt="#"/></span><span class="text_cont">Gift University<br>Gujranwala, Pakistan</span>
-                    </li>
-                    <li><span><img src="images/phone_icon.png" alt="#"/></span><span class="text_cont">055*******<br>055********</span>
-                    </li>
-                    <li><span><img src="images/mail_icon.png" alt="#"/></span><span class="text_cont">181400029@gift.edu.pk<br>181400179@gift.edu.pk</span>
-                    </li>
-                </ul>
-
-            </div>
-            <br> <br>
-            <div class="col-lg-4 col-md-6">
-                <div class="footer_links">
-                    <h3>Quick link</h3>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Home</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Private NGO</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Loan Application</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Tracking Application</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> About Us</a></li>
-
-                    </ul>
-                </div>
-            </div>
-            <!-- <div class="col-lg-4 col-md-6">
-               <div class="footer_links">
-                  <h3>Instagram</h3>
-                  <ol>
-                     <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                     <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                     <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                     <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                  </ol>
-               </div>
-            </div> -->
-            <br> <br>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer_links">
-                    <h3>Contact us</h3>
-                    <form action="index.html">
-                        <fieldset>
-                            <div class="field">
-                                <input type="text" name="name" placeholder="Your Name" required=""/>
-                            </div>
-                            <div class="field">
-                                <input type="email" name="email" placeholder="Email" required=""/>
-                            </div>
-                            <div class="field">
-                                <input type="text" name="subject" placeholder="Subject" required=""/>
-                            </div>
-                            <div class="field">
-                                <textarea placeholder="Message"></textarea>
-                            </div>
-                            <div class="field">
-                                <div class="center">
-                                    <button class="reply_bt">Send</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<div class="cpy">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p>Copyright © 2022 Design by <a href="">Muhammad Tayyab</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="{{  asset('lvs_assets/js/jquery.min.js') }}"></script>
-<script src="{{  asset('lvs_assets/js/plugin.js') }}"></script>
-<script src="{{  asset('lvs_assets/js/custom.js') }}"></script>
-<script src="{{  asset('lvs_assets/js/bootstrap.bundle.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('lvs_assets/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('lvs_assets/vendor/animsition/js/animsition.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('lvs_assets/vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{ asset('lvs_assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('lvs_assets/vendor/select2/select2.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('lvs_assets/vendor/daterangepicker/moment.min.js') }}"></script>
+	<script src="{{ asset('lvs_assets/vendor/daterangepicker/daterangepicker.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('lvs_assets/vendor/countdowntime/countdowntime.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ asset('lvs_assets/js/main.js') }}"></script>
 
 </body>
 </html>

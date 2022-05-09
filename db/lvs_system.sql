@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2022 at 05:57 PM
+-- Generation Time: May 10, 2022 at 01:19 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.14
 
@@ -36,6 +36,7 @@ CREATE TABLE `applications` (
   `home_address` varchar(50) DEFAULT NULL,
   `permanent_address` varchar(50) DEFAULT NULL,
   `issue_date` date DEFAULT NULL,
+  `status` int(1) DEFAULT 0 COMMENT '0=pending,1=complete',
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -44,12 +45,8 @@ CREATE TABLE `applications` (
 -- Dumping data for table `applications`
 --
 
-INSERT INTO `applications` (`id`, `fname`, `lname`, `cnic_no`, `phone`, `home_address`, `permanent_address`, `issue_date`, `updated_at`, `created_at`) VALUES
-(1, 'waqar', 'amjad', '3410179447581', NULL, NULL, NULL, NULL, '2022-05-04 10:04:51', '2022-05-04 10:04:51'),
-(2, 'waqar', 'amjad', '34101794475811', '900078601', 'shalimar town', 'waleed block 33', '2022-05-01', '2022-05-04 10:13:47', '2022-05-04 10:13:47'),
-(3, 'waqarq', 'amjad', '34101794475811', '900078601', 'shalimar town', 'waleed block 33', '2022-05-01', '2022-05-04 10:15:11', '2022-05-04 10:15:11'),
-(4, 'hamza', 'amjad', '2312345678', '900078601', 'shalimar town', 'waleed block 33', '2022-05-01', '2022-05-04 10:15:50', '2022-05-04 10:15:50'),
-(5, 'hamza', 'amjad', '2312345678', '900078601', 'shalimar town', 'waleed block 33', '2022-05-01', '2022-05-04 10:16:18', '2022-05-04 10:16:18');
+INSERT INTO `applications` (`id`, `fname`, `lname`, `cnic_no`, `phone`, `home_address`, `permanent_address`, `issue_date`, `status`, `updated_at`, `created_at`) VALUES
+(9, 'lvs', 'system', '0900786010011', '900078601', 'gift university', 'gift university', '2022-05-20', 1, '2022-05-09 23:07:59', '2022-05-09 17:32:29');
 
 -- --------------------------------------------------------
 
@@ -113,7 +110,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `cnic_no`, `email`, `password`, `user_type`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'waqar amjad', '34101794475811', 'admin@gmail.com', '$2y$10$ndGOR1TCqcXyqlNTKD3APO9ki3TcOMU6WPpBKXwD2DaQy67Xxqvra', '1', '1', NULL, '2022-05-04 12:09:57', '2022-05-04 04:21:07'),
+(2, 'admin', '34101794475811', 'admin@gmail.com', '$2y$10$ndGOR1TCqcXyqlNTKD3APO9ki3TcOMU6WPpBKXwD2DaQy67Xxqvra', '1', '1', NULL, '2022-05-09 04:54:34', '2022-05-04 04:21:07'),
 (3, 'demo user', '3410180012938', 'demo@gmail.com', '123456', '2', '1', NULL, '2022-05-04 12:10:37', '2022-05-04 12:10:37');
 
 --
@@ -155,7 +152,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`

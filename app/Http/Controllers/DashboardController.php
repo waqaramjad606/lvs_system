@@ -12,8 +12,10 @@ class DashboardController extends Controller
 {
     public function admin_dashboard()
     {
-
-        return view('dashboard');
+        $pending_application=Application::all()->where('status','=','0')->count();
+        $approved_application=Application::all()->where('status','=','1')->count();
+        $total_application=Application::all()->count();
+        return view('dashboard',compact('pending_application','approved_application','total_application'));
     }
 
     public function user_page()
@@ -66,8 +68,13 @@ class DashboardController extends Controller
         $application->issue_date = $request->input('issuedate');
         $application->home_address = $request->input('homeaddress');
         $application->permanent_address = $request->input('permanentaddress');
-        $application->save();
-        return redirect()->route('apply_application')->with('success', 'Application apply successfully!');
+//        $application->save();
+        if($application->save()){
+            return response()->json('true');
+        }else{
+            return response()->json('false');
+        }
+
     }
 
     public function accpetApplication(Request $request)

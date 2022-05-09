@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Track Application</title>
+	<title>Verification</title>
 	<meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,83 +9,39 @@
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/track.css">
-      <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="stylesheet" href="{{ asset('lvs_assets/css/verify.css') }} ">
+    <link rel="stylesheet" href="{{ asset('lvs_assets/css/bootstrap.min.css') }} ">
+    <link rel="stylesheet" href="{{ asset('lvs_assets/css/track.css') }}">
+    <link rel="stylesheet" href="{{ asset('lvs_assets/css/responsive.css') }}">
 
 </head>
 
 <body class="main-layout">
-<!--       <div class="loader_bg">
-         <div class="loader"><img src="images/loading.gif" alt="" /></div>
-      </div> -->
-      <header>
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-lg-3 logo_section">
-                  <div class="full">
-                     <div class="center-desk">
 
-                        <div class="logo" style="width: 50%; height: 50%;"><p>   </p> <a href="index.html">
-                              <img src="images/logo.png" alt="#"></a> </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-9">
-                  <div class="menu-area">
-                     <div class="limit-box">
-                        <nav class="main-menu">
-                           <ul class="menu-area-main">
-                              <li></li>
-                              <li>
-                                 <a href="Home.blade.php">Home</a>
-                              </li>
+@include('layouts.header');
 
-                              <li>
-                                 <a href="apply.blade.php">Loan Application</a>
-                              </li>
-                              <li class="active">
-                                 <a href="Track.html">Track Application</a>
-                              </li>
-                              <li>
-                                 <a href="Verification.html">Verification</a>
-                              </li>
-                              <li>
-                                 <a href="About.html">About Us</a>
-                              </li>
-                              <li>
-                                 <a href="login.blade.php">Login</a>
-                              </li>
 
-                           </ul>
-                        </nav>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </header>
+
 
 <br><br><br><br>
+
 <div class="container">
    <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
          <div class="card">
             <div class="card-header" style="color: black; font-size: 20px; text-align: center;">
-               Track Application
+               Enter Verification Details
             </div>
             <div class="card-body" style="align-items: center">
                <input type="number" name="" placeholder="Enter CNIC Number">
 
-               <input type="number" name="" placeholder="Enter PIN Code">
+
             </div>
             <div class="card-footer" style="align-items: center;">
-               <button type="Submit" style="width: 47%; margin-left: 10px;"  id="myBtn" class="btn btn-success">Submit</button>
-               <button type="Submit" style="width: 47%; margin-left: 10px;"  class="btn btn-danger">Cancel</button>
-
-
-
+               <button type="Submit" style="width: 45%; margin-left: 10px;" id="myBtn" class="btn btn-success">Submit</button>
+               <button type="Submit" style="width: 45%; margin-left: 10px;"  class="btn btn-danger">Cancel</button>
 <div id="myModal" class="modal">
 
   <div class="modal-content">
@@ -141,47 +97,8 @@ window.onclick = function(event) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="form-popup" id="myForm">
-  <form class="form-container">
-
-
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
-
-<script>
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
-</script>
-
- -->
-
-
-
-
-
-
-               <!-- <input type="Submit" name="" value="Submit" href="#">
-               <input type="Submit" name="" value="Cancel" href="#"> -->
-               <!-- <input type="Cancel" name="" value="Login" href="#"> -->
             </div>
+
          </div>
 
 
@@ -194,52 +111,11 @@ function closeForm() {
 
 
 
-<!-- <h2>Our Partners</h2>
-   <marquee behavior="scroll" direction="left">
-   <img src="Images/bop.png" width="120" height="80" alt="Natural" />
-   <img src="Images/abl.png" width="120" height="80" alt="Natural" />
-   <img src="Images/ubl.png" width="120" height="80" alt="Natural" />
-   <img src="Images/gift.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/meezan.png" width="120" height="80" alt="Natural" />
-   <img src="Images/sindh.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/smeda.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/state.png" width="120" height="80" alt="Natural" />
-   <img src="Images/gift.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/bop.png" width="120" height="80" alt="Natural" />
-   <img src="Images/abl.png" width="120" height="80" alt="Natural" />
-   <img src="Images/ubl.png" width="120" height="80" alt="Natural" />
-   <img src="Images/gift.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/meezan.png" width="120" height="80" alt="Natural" />
-   <img src="Images/sindh.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/smeda.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/state.png" width="120" height="80" alt="Natural" />
-   <img src="Images/gift.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/bop.png" width="120" height="80" alt="Natural" />
-   <img src="Images/abl.png" width="120" height="80" alt="Natural" />
-   <img src="Images/ubl.png" width="120" height="80" alt="Natural" />
-   <img src="Images/gift.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/meezan.png" width="120" height="80" alt="Natural" />
-   <img src="Images/sindh.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/smeda.jpg" width="120" height="80" alt="Natural" />
-   <img src="Images/state.png" width="120" height="80" alt="Natural" />
-   <img src="Images/gift.jpg" width="120" height="80" alt="Natural" />
-
-  </marquee>
-
- -->
-
-
-
-
-
-
-
-
 
 
 <br><br><br><br><br><br><br>
 
-      	      <footer>
+               <footer>
          <div class="container">
             <div class="row">
                <div class="col-lg-4 col-md-6">
@@ -334,11 +210,10 @@ function closeForm() {
 
 
 
-	<script src="js/jquery.min.js"></script>
-   <script src="js/plugin.js"></script>
-   <script src="js/custom.js"></script>
-   <script src="js/bootstrap.bundle.min.js"></script>
-
+<script src="{{ asset('lvs_assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('lvs_assets/js/plugin.js') }}"></script>
+<script src="{{ asset('lvs_assets/js/custom.js') }}"></script>
+<script src="{{ asset('lvs_assets/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 </html>
