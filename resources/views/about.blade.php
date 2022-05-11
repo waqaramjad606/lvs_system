@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>About Us</title>
-	<meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
+    <title>About Us</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <link rel="stylesheet" href="{{ asset('lvs_assets/css/bootstrap.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('lvs_assets/css/track.css') }}">
@@ -19,59 +19,59 @@
 <body class="main-layout">
 @include('layouts.header');
 <div class="About-bg">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="aboutheading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aboutheading">
 
-               <h3 style="text-align: center; margin-top: 10px;">About <span class="orange_color">US</span></h3>
+                    <h3 style="text-align: center; margin-top: 10px;">About <span class="orange_color">US</span></h3>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="container">
-   <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-6">
-         <div class="card">
-            <div class="card-header" style="color: black; font-size: 20px; text-align: center;">
-               Loan Provider Team
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header" style="color: black; font-size: 20px; text-align: center;">
+                    Loan Provider Team
+                </div>
+                <div class="card-body" style="align-items: center">
+                    <p>Small business owners often ask us about the loan application process. What is required to apply for financing and successfully complete the process? How long will it take to receive funds? Whether you need financing today or are hoping to gain a better understanding of the loan process to plan for future needs, it is important to know what to expect from application to closing.</p>
+                </div>
+                <div class="card-footer" style="align-items: center;">
+                    <a href="apply.blade.php">Now Apply for the loan</a>
+                    <!-- <input type="Submit" name="" value="Submit" href="#">
+                    <input type="Submit" name="" value="Cancel" href="#"> -->
+                    <!-- <input type="Cancel" name="" value="Login" href="#"> -->
+                </div>
             </div>
-            <div class="card-body" style="align-items: center">
-               <p>Small business owners often ask us about the loan application process. What is required to apply for financing and successfully complete the process? How long will it take to receive funds? Whether you need financing today or are hoping to gain a better understanding of the loan process to plan for future needs, it is important to know what to expect from application to closing.</p>
-            </div>
-            <div class="card-footer" style="align-items: center;">
-               <a href="apply.blade.php">Now Apply for the loan</a>
-               <!-- <input type="Submit" name="" value="Submit" href="#">
-               <input type="Submit" name="" value="Cancel" href="#"> -->
-               <!-- <input type="Cancel" name="" value="Login" href="#"> -->
-            </div>
-         </div>
 
 
-      </div>
-      <div class="col-md-4">
-         <img style="width: inherit;" src="{{ asset('lvs_assets/images/about.jpg') }} ">
-      </div>
-   </div>
+        </div>
+        <div class="col-md-4">
+            <img style="width: inherit;" src="{{ asset('lvs_assets/images/about.jpg') }} ">
+        </div>
+    </div>
 </div>
 
 
 
 <div class="About-bg">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="aboutheading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aboutheading">
 
-               <h3 style="text-align: center; margin-top: 10px;">About Our<span class="orange_color">Team</span></h3>
+                    <h3 style="text-align: center; margin-top: 10px;">About Our<span class="orange_color">Team</span></h3>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
 
 
@@ -79,44 +79,44 @@
 
 
 <div class="section layout_padding">
-         <div class="container">
+    <div class="container">
 
-            <div class="row">
-               <div class="col-md-5">
-                  <img src="{{ asset('lvs_assets/Images/bop.png') }} " alt="#" />
-               </div>
-               <div class="col-md-6">
-                  <div class="full blog_cont">
-                     <h4>Bank Of Punjab</h4>
-                     <h5>Today Date</h5>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-               </div>
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{{ asset('lvs_assets/Images/bop.png') }} " alt="#" />
             </div>
+            <div class="col-md-6">
+                <div class="full blog_cont">
+                    <h4>Bank Of Punjab</h4>
+                    <h5>Today Date</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
         <br><br>                <div class="row margin_top_30">
-               <div class="col-md-5">
-                  <img src="{{ asset('lvs_assets/Images/ubl.png') }}" alt="#" />
-               </div>
-               <div class="col-md-6">
-                  <div class="full blog_cont">
-                     <h4>Bank Of Punjab</h4>
-                     <h5>Today Date</h5>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  </div>
-               </div>
+            <div class="col-md-5">
+                <img src="{{ asset('lvs_assets/Images/ubl.png') }}" alt="#" />
             </div>
-<br><br>
-</div>
+            <div class="col-md-6">
+                <div class="full blog_cont">
+                    <h4>Bank Of Punjab</h4>
+                    <h5>Today Date</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
 </div>
 
 
@@ -169,82 +169,16 @@
 
 <br><br><br><br><br><br><br>
 
-      	      <footer>
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-4 col-md-6">
-                     <h3 style="color:white; font-size: 20px;">Contact Information</h3>
-                     <ul class="contact_information">
-                     <li><span><img src="images/location_icon.png" alt="#" /></span><span class="text_cont">Gift University<br>Gujranwala, Pakistan</span></li>
-                     <li><span><img src="images/phone_icon.png" alt="#" /></span><span class="text_cont">055*******<br>055********</span></li>
-                     <li><span><img src="images/mail_icon.png" alt="#" /></span><span class="text_cont">181400029@gift.edu.pk<br>181400179@gift.edu.pk</span></li>
-                  </ul>
-
-               </div>
-               <br> <br>
-               <div class="col-lg-4 col-md-6">
-                  <div class="footer_links">
-                     <h3>Quick link</h3>
-                     <ul>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Home</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Private NGO</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Loan Application</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Tracking Application</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> About Us</a></li>
-
-                     </ul>
-                  </div>
-               </div>
-               <!-- <div class="col-lg-4 col-md-6">
-                  <div class="footer_links">
-                     <h3>Instagram</h3>
-                     <ol>
-                        <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                        <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                        <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                        <li><img class="img-responsive" src="images/footer_blog.png" alt="#" /></li>
-                     </ol>
-                  </div>
-               </div> -->
-               <br> <br>
-               <div class="col-lg-3 col-md-6">
-                  <div class="footer_links">
-                     <h3>Contact us</h3>
-                     <form action="index.html">
-                        <fieldset>
-                           <div class="field">
-                              <input type="text" name="name" placeholder="Your Name" required="" />
-                           </div>
-                           <div class="field">
-                              <input type="email" name="email" placeholder="Email" required="" />
-                           </div>
-                           <div class="field">
-                              <input type="text" name="subject" placeholder="Subject" required="" />
-                           </div>
-                           <div class="field">
-                              <textarea placeholder="Message"></textarea>
-                           </div>
-                           <div class="field">
-                              <div class="center">
-                                 <button class="reply_bt">Send</button>
-                              </div>
-                           </div>
-                        </fieldset>
-                     </form>
-                  </div>
-               </div>
+@include('layouts.footer');
+<div class="cpy">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Copyright © 2022 Design by <a href="">Muhammad Tayyab</a></p>
             </div>
-         </div>
-      </footer>
-      <div class="cpy">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <p>Copyright © 2022 Design by <a href="">Muhammad Tayyab</a></p>
-               </div>
-            </div>
-         </div>
-      </div>
+        </div>
+    </div>
+</div>
 
 
 

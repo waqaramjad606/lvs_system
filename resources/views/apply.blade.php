@@ -62,7 +62,8 @@
                 <input type="date" name="issuedate" id="issuedate" placeholder="CNIC Issuance Date" required>
                 <input type="number" name="phone" id="phone" placeholder="Enter Phone Number" required>
                 <input type="text" name="homeaddress" id="homeaddress" placeholder="Home Adress" required>
-                <input type="text" name="permanentaddress" id="permanentaddress" placeholder="Permanent Address" required>
+                <input type="text" name="permanentaddress" id="permanentaddress" placeholder="Permanent Address"
+                       required>
                 <input type="submit" value="Submit & Next" style="color:black;">
                 <br>
             </form>
@@ -74,67 +75,7 @@
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <h3 style="color:white; font-size: 20px;">Contact Information</h3>
-                <ul class="contact_information">
-                    <li><span><img src="{{ asset('lvs_assets/images/location_icon.png') }} " alt="#"/></span><span
-                            class="text_cont">Gift University<br>Gujranwala, Pakistan</span></li>
-                    <li><span><img src="{{ asset('lvs_assets/images/phone_icon.png') }}" alt="#"/></span><span
-                            class="text_cont">055*******<br>055********</span></li>
-                    <li><span><img src="{{ asset('lvs_assets/images/mail_icon.png') }}" alt="#"/></span><span
-                            class="text_cont">181400029@gift.edu.pk<br>181400179@gift.edu.pk</span></li>
-                </ul>
-
-            </div>
-            <br> <br>
-            <div class="col-lg-4 col-md-6">
-                <div class="footer_links">
-                    <h3>Quick link</h3>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Home</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Private NGO</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Loan Application</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Tracking Application</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> About Us</a></li>
-
-                    </ul>
-                </div>
-            </div>
-
-            <br> <br>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer_links">
-                    <h3>Contact us</h3>
-                    <form action="">
-                        <fieldset>
-                            <div class="field">
-                                <input type="text" name="name" placeholder="Your Name" required=""/>
-                            </div>
-                            <div class="field">
-                                <input type="email" name="email" placeholder="Email" required=""/>
-                            </div>
-                            <div class="field">
-                                <input type="text" name="subject" placeholder="Subject" required=""/>
-                            </div>
-                            <div class="field">
-                                <textarea placeholder="Message"></textarea>
-                            </div>
-                            <div class="field">
-                                <div class="center">
-                                    <button class="reply_bt">Send</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+@include('layouts.footer');
 <div class="cpy">
     <div class="container">
         <div class="row">
@@ -163,22 +104,33 @@
         var permanentaddress = $("#permanentaddress").val();
         var letters = /^[A-Za-z]+$/;
         validRegEx = /^[^\\\/&]*$/
+
+        var mydate = issuedate.split('-');
+        var year = mydate[0];
+        var month = mydate[1];
+        var day = mydate[2];
+        if(!isOverEighteen(year,month,day)){
+            console.log("<18");
+            swal("Alert", 'Age must greater then 18 years', 'info');
+            return;
+        }
+
         if (cnic_no.length > 13) {
             swal("Alert", 'CNIC length cannot be greater then 13 digits', 'info');
             return;
         }
 
-        if(cnic_no != cnic_no_1){
+        if (cnic_no != cnic_no_1) {
             swal("Alert", 'CNIC mismatch!', 'info');
             return;
         }
-        if(fname.match(letters) == null){
-            swal("Alert", 'First name cannot contain special characters!', 'info');
+        if (fname.match(letters) == null) {
+            swal("Alert", 'First name cannot contain special characters or numbers!', 'info');
             return;
         }
 
-        if(lname.match(letters) == null){
-            swal("Alert", 'Last name cannot contain special characters!', 'info');
+        if (lname.match(letters) == null) {
+            swal("Alert", 'Last name cannot contain special characters or numbers!', 'info');
             return;
         }
 
@@ -196,18 +148,34 @@
                 permanentaddress: permanentaddress
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 if (data.trim() == 'true') {
                     swal("success", "Application apply successfully!", 'success')
                         .then((value) => {
-                        location.reload();
-                    });
+                            location.reload();
+                        });
                 } else {
                     swal("Error", 'Failed to apply for loan application', 'error')
                 }
             }
         });
     });
+
+    function isDate18orMoreYearsOld(day, month, year) {
+        return new Date(year + 18, month - 1, day) <= new Date();
+    }
+
+    function isOverEighteen(year, month, day) {
+        var now = parseInt(new Date().toISOString().slice(0, 10).replace(/-/g, ''));
+        var dob = year * 10000 + month * 100 + day * 1; // Coerces strings to integers
+
+        // return now - dob > 180000;
+        if(now - dob > 180000){
+            return true;
+        }else{
+            return false;
+        }
+    }
 </script>
 
 

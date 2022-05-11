@@ -43,8 +43,14 @@ class DashboardController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->cnic_no = $request->cnic_no;
-        $user->save();
-        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+//        Hash::make($request->new_password);
+//        $user->password = Hash::make($request->name);
+        if($user->save()){
+            return response()->json('true');
+        }else{
+            return response()->json('false');
+        }
+
     }
 
     public function loan_application_page()

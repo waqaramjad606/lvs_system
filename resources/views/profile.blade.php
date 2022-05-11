@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>Dashboard</title>
 
     @include('dashboard_includes/dashboard-links')
@@ -48,20 +49,16 @@
                             <div class="card-header">
                                 <h4>Personal Info</h4>
                             </div>
-                            @if(session()->has('success'))
-                                <div class="alert alert-success">
-                                    {{ session()->get('success') }}
-                                </div>
-                            @endif
+
                             <div class="card-body">
-                                <form id="updateUserProfile" method="post" action="{{ route('profile.update') }}">
-                                    <input class="form-control" type="hidden" id="uid" name="user_id" value="{{$user->id}}">
+                                <form id="updateUserProfile" method="post">
+                                    <input class="form-control" type="hidden" id="user_id" name="user_id" value="{{$user->id}}">
 
                                     <label class="my-2">Full Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{ $user->name }}">
+                                    <input type="text" class="form-control" name="name" id="name" value="{{ $user->name }}">
 
                                     <label class="my-2">Email</label>
-                                    <input type="email" class="form-control" name="email" value="{{ $user->email }}">
+                                    <input type="email" class="form-control" name="email" id="email" value="{{ $user->email }}">
 
 {{--                                    <label class="my-2">CNIC NO</label>--}}
 {{--                                    <input type="text" class="form-control" name="cnic_no" value="{{ $user->cnic_no }}">--}}
@@ -92,7 +89,41 @@
     $( document ).ready(function() {
         $("#profileli").addClass("active");
 
-    });</script>
+    });
+    $("#updateUserProfile").submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "{{ route('profile.update') }}",
+            type: "POST",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {
+                user_id: $("#user_id").val(),
+                name: $("#name").val(),
+                email: $("#email").val(),
+            },
+            success: function (data) {
+                console.log(data);
+                if(data.trim()=='true'){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'success',
+                        text: 'User profile updated successfully!',
+                    }).then((result) => {
+                        location.reload();
+                    })
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to update user profile!'
+                    })
+                }
+
+            }
+        });
+    });
+</script>
+
 <script src="customjs/myjs.js"></script>
 </body>
 </html>
