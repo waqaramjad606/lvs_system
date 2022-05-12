@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use function PHPUnit\Framework\isNull;
 
 class Controller extends BaseController
 {
@@ -32,6 +33,19 @@ class Controller extends BaseController
         $application = Application::all()->where('cnic_no', '=', $request->cnic_no);
 //        $status=$application->status;
         return response()->json($application);
+
+    }
+
+    public function getVeryfication(Request $request)
+    {
+        $application = Application::all()->where('cnic_no', '=', $request->cnic_no);
+        if(!empty($application)){
+//            $data[]=array('fname'=> $application->fname,'lname'=>$application->lname);
+            echo json_encode($application);
+//            'cnic_no'=>$application->cnic_no,'phone'=>$application->phone,'issue_date'=>$application->cnic_no,'home_address'=>$application->home_address,'permanent_address'=>$application->permanent_address
+        }else{
+            return response()->json('false');
+        }
 
     }
 

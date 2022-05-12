@@ -3,7 +3,14 @@
     <a href="index3.html" class="brand-link">
         <img src="{{asset('admin_assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">Admin Dashboard</span>
+        <span class="brand-text font-weight-light">
+
+            @if(Auth::user()->user_type == 1)
+                Admin Dashboard
+            @else
+                Sub-Admin Dashboard
+            @endif
+        </span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +21,13 @@
                 <img src="{{asset('admin_assets/dist/img/user2-160x160.jpg')}} " class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Admin Dashboard</a>
+                <a href="#" class="d-block">
+                    @if(Auth::user()->user_type == 1)
+                        Admin Dashboard
+                    @else
+                        Sub-Admin Dashboard
+                    @endif
+                </a>
             </div>
         </div>
 
@@ -31,23 +44,36 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('dashboard.users') }}" class="nav-link" id="usersli">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Users
-                        </p>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('dashboard.loan_application') }}" class="nav-link" id="loanli">
-                        <i class="nav-icon fas fa-book-reader"></i>
-                        <p>
-                            Loan Applications
-                        </p>
-                    </a>
-                </li>
+                @if(Auth::user()->user_type == 1)
+
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard.users') }}" class="nav-link" id="usersli">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Users
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard.loan_application') }}" class="nav-link" id="loanli">
+                            <i class="nav-icon fas fa-book-reader"></i>
+                            <p>
+                                Loan Applications
+                            </p>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a href="{{ route('applications') }}" class="nav-link" id="loanli">
+                            <i class="nav-icon fas fa-book-reader"></i>
+                            <p>
+                                Loan Applications
+                            </p>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="nav-header">Profile</li>
 

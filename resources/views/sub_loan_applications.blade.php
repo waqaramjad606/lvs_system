@@ -175,7 +175,6 @@
                         id: id,
                     },
                     success: function (data) {
-                        console.log(data);
                         if (data.trim() == "true") {
                             Swal.fire({
                                 icon: 'success',

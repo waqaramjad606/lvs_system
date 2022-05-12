@@ -54,6 +54,7 @@
 
                 <p>Total Applications</p>
               </div>
+                <a href="{{ Auth::user()->user_type == 1 ? route('dashboard.loan_application') : route('applications') }}  " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -64,6 +65,7 @@
 
                 <p>Approved Applications</p>
               </div>
+                <a href="{{ Auth::user()->user_type == 1 ? route('dashboard.loan_application') : route('applications') }}  " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -74,22 +76,24 @@
 
                 <p>Pending Applications</p>
               </div>
+                <a href="{{ Auth::user()->user_type == 1 ? route('dashboard.loan_application') : route('applications') }}  " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-{{--          <div class="col-lg-3 col-6">--}}
-{{--            <!-- small box -->--}}
-{{--            <div class="small-box bg-danger">--}}
-{{--              <div class="inner">--}}
-{{--                <h3>65</h3>--}}
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>
+                    {{ $reject_application }}
+                </h3>
 
-{{--                <p>Unique Visitors</p>--}}
-{{--              </div>--}}
-{{--              <div class="icon">--}}
-{{--                <i class="ion ion-pie-graph"></i>--}}
-{{--              </div>--}}
-{{--              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>--}}
-{{--            </div>--}}
-{{--          </div>--}}
+                <p>Rejected Applications</p>
+              </div>
+
+                <a href="{{ Auth::user()->user_type == 1 ? route('dashboard.loan_application') : route('applications') }}  " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
+            </div>
+          </div>
         </div>
         <!-- /.row -->
         <!-- Main row -->

@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Application;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
+
 
 class DashboardController extends Controller
 {
@@ -14,8 +14,9 @@ class DashboardController extends Controller
     {
         $pending_application=Application::all()->where('status','=','0')->count();
         $approved_application=Application::all()->where('status','=','1')->count();
+        $reject_application=Application::all()->where('status','=','2')->count();
         $total_application=Application::all()->count();
-        return view('dashboard',compact('pending_application','approved_application','total_application'));
+        return view('dashboard',compact('pending_application','approved_application','total_application','reject_application'));
     }
 
     public function user_page()
@@ -64,6 +65,12 @@ class DashboardController extends Controller
         return view('apply');
     }
 
+    public function sub_loan_application_page()
+    {
+        $applications = Application::all();
+        return view('sub_loan_applications',compact('applications'));
+    }
+
     public function submitApplication(Request $request)
     {
         $application = new Application();
@@ -100,6 +107,33 @@ class DashboardController extends Controller
         return response()->json("true");
 //        return redirect()->route('dashboard.loan_application')->with('success', 'Application rejected successfully');
     }
+
+
+    public function blockUser(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->status = 0;
+        if($user->save()){
+            return response()->json('true');
+        }else{
+            return response()->json('false');
+        }
+
+    }
+
+    public function activeUser(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->status = 1;
+        if($user->save()){
+            return response()->json('true');
+        }else{
+            return response()->json('false');
+        }
+
+    }
+
+
 
 
 }
