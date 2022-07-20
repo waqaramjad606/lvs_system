@@ -57,6 +57,15 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('dashboard.loan_organizations') }}" class="nav-link" id="orgli">
+                            <i class="nav-icon fa fa-building"></i>
+                            <p>
+                                Loan Organization
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="{{ route('dashboard.loan_application') }}" class="nav-link" id="loanli">
                             <i class="nav-icon fas fa-book-reader"></i>
                             <p>

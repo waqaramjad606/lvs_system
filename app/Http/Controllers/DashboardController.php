@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Organizations;
 use App\Models\Application;
+use App\Models\Nadra_information;
 use Illuminate\Support\Facades\App;
 
 
@@ -62,7 +64,8 @@ class DashboardController extends Controller
 
     public function apply_application()
     {
-        return view('apply');
+        $organizations = Organizations::all();
+        return view('apply',compact('organizations'));
     }
 
     public function sub_loan_application_page()
@@ -81,12 +84,22 @@ class DashboardController extends Controller
         $application->issue_date = $request->input('issuedate');
         $application->home_address = $request->input('homeaddress');
         $application->permanent_address = $request->input('permanentaddress');
-//        $application->save();
-        if($application->save()){
-            return response()->json('true');
+//        $application->gname = $request->input('g_name');
+//        $application->guarantor_number = $request->input('guarantor_number');
+
+        $check_cnic=$request->input('cnic_no');
+
+        $nadra_verification = Nadra_information::all()->where('cnic', '=', $check_cnic);
+        if($nadra_verification->count()>0){
+            if($application->save()){
+                return response()->json('true');
+            }else{
+                return response()->json('false');
+            }
         }else{
-            return response()->json('false');
+            return response()->json('not_found');
         }
+
 
     }
 
@@ -133,7 +146,9 @@ class DashboardController extends Controller
 
     }
 
-
-
-
+    public function loan_organizations()
+    {
+        $organizations = Organizations::all();
+        return view('organizations',compact('organizations'));
+    }
 }

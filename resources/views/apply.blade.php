@@ -48,23 +48,40 @@
             @endif
         </div>
         <div class="col-md-12">
-            <p class="text-muted" style="color: black; font-size: 25px; text-align:center;"> Please Enter your
+            <p class="text-muted" style="color: black; font-size: 25px; text-align:center;" id="heading_text"> Please Enter your
                 Detail!</p>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-10">
-
             <form class="box" id="applyForm" method="post">
-                <input type="text" name="fname" id="fname" placeholder="Enter First Name" required>
-                <input type="text" name="lname" id="lname" placeholder="Enter Second Name" required>
-                <input type="number" name="cnic_no" id="cnic_no" placeholder="Enter CNIC number" required>
-                <input type="number" name="cnic_no_1" id="cnic_no_1" placeholder="Re-Enter CNIC number" required>
-                <input type="date" name="issuedate" id="issuedate" placeholder="CNIC Issuance Date" required>
-                <input type="number" name="phone" id="phone" placeholder="Enter Phone Number" required>
-                <input type="text" name="homeaddress" id="homeaddress" placeholder="Home Adress" required>
-                <input type="text" name="permanentaddress" id="permanentaddress" placeholder="Permanent Address"
-                       required>
-                <input type="submit" value="Submit & Next" style="color:black;">
+                <div id="apply_form_1">
+                    <input type="text" name="fname" id="fname" placeholder="Enter First Name" required>
+                    <input type="text" name="lname" id="lname" placeholder="Enter Second Name" required>
+                    <input type="number" name="cnic_no" id="cnic_no" placeholder="Enter CNIC number" required>
+                    <input type="number" name="cnic_no_1" id="cnic_no_1" placeholder="Re-Enter CNIC number" required>
+                    <input type="date" name="issuedate" id="issuedate" placeholder="CNIC Issuance Date" required>
+                    <input type="number" name="phone" id="phone" placeholder="Enter Phone Number" required>
+                    <input type="text" name="homeaddress" id="homeaddress" placeholder="Home Adress" required>
+                    <input type="text" name="permanentaddress" id="permanentaddress" placeholder="Permanent Address" required>
+                    <input type="button" value="Submit & Next" style="color:black;" id="apply_form_1_btn">
+                </div>
+                {{--<input type="submit" value="Submit & Next" style="color:black;">--}}
+                <div id="apply_form_2" style="display: none;">
+{{--                    <input type="text" name="gname" id="gname" placeholder="Enter guarantor Name" required>--}}
+{{--                    <input type="number" name="g_number" id="g_number" placeholder="Enter guarantor mobile no" required>--}}
+                    <input type="button" value="Submit & Next" style="color:black;" id="apply_form_2_btn">
+                </div>
+
+                <div id="apply_form_3" style="display: none;">
+                    @foreach($organizations as $organization)
+                        <div class="col-md-3">
+                            <h2>{{ $organization->name }}</h2>
+                            <input type="checkbox" name="loan_organization" value="{{$organization->name}}">
+                        </div>
+                    @endforeach
+                    <input type="submit" value="Submit & Next" style="color:black;">
+                </div>
+
                 <br>
             </form>
         </div>
@@ -93,6 +110,7 @@
 
 <script>
     $("#applyForm").submit(function (event) {
+        alert('');
         event.preventDefault();
         var fname = $("#fname").val();
         var lname = $("#lname").val();
@@ -102,6 +120,10 @@
         var phone = $("#phone").val();
         var homeaddress = $("#homeaddress").val();
         var permanentaddress = $("#permanentaddress").val();
+
+        var g_name = $("#gname").val();
+        var guarantor_number = $("#g_number").val();
+        var organization = $("#permanentaddress").val();
         var letters = /^[A-Za-z]+$/;
         validRegEx = /^[^\\\/&]*$/
 
@@ -145,12 +167,19 @@
                 issuedate: issuedate,
                 phone: phone,
                 homeaddress: homeaddress,
-                permanentaddress: permanentaddress
+                permanentaddress: permanentaddress,
+                g_name: g_name,
+                guarantor_number: guarantor_number
             },
             success: function (data) {
                 // console.log(data);
                 if (data.trim() == 'true') {
                     swal("success", "Application apply successfully!", 'success')
+                        .then((value) => {
+                            location.reload();
+                        });
+                }else if(data.trim() == 'not_found'){
+                    swal("Attention", "Your information in not varified by nadra ", 'info')
                         .then((value) => {
                             location.reload();
                         });
@@ -172,6 +201,16 @@
             return false;
         }
     }
+    $("#apply_form_1_btn").click(function (){
+        $("#apply_form_1").hide();
+        $("#apply_form_2").show();
+    });
+
+    $("#apply_form_2_btn").click(function (){
+        $("#apply_form_2").hide();
+        $("#apply_form_3").show();
+    });
+
 </script>
 
 

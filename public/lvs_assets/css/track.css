@@ -145,7 +145,7 @@ a, .btn {
   text-align: center;
   color: white;
   margin-top: 10px;
-  
+
 }
 .centered {
   position: absolute;
@@ -825,7 +825,7 @@ h3{
     font-weight: 600;
     margin: -25px 0 25px 0;
     padding: 0;
-    line-height: normal;	
+    line-height: normal;
 }
 
 .slider_cont_section p {
@@ -897,7 +897,7 @@ ul.social_icon li a {
 .cpy p {
     font-size: 14px;
     padding: 10px 0;
-    font-weight: 400; 
+    font-weight: 400;
 }
 
 .cpy p a:hover,
@@ -1158,13 +1158,13 @@ nav.main-menu {
 	background-color: #f6f6f6f6;
 }
 
-.About-bg .aboutheading h3 { 
+.About-bg .aboutheading h3 {
     font-size: 50px;
     font-weight: 700;
     line-height: 50px;
     text-align:center;
     padding: 40px 0px;
-    text-transform: uppercase; 
+    text-transform: uppercase;
 }
 .orange_color {
 	color: #ff0000;
@@ -1230,7 +1230,28 @@ nav.main-menu {
     cursor: pointer
 }
 
+.box input[type="button"] {
+    border: 2px;
+    width: 40%;
+    background: none;
+    display: block;
+    margin: auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    margin-top: 10px;
+    outline: none;
+    color: white;
+    border-radius: 25px;
+    transition: 2s;
+    cursor: pointer
+}
+
 .box input[type="submit"]:hover {
+    background: #2ecc71
+}
+
+.box input[type="button"]:hover {
     background: #2ecc71
 }
 

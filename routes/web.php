@@ -42,6 +42,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::delete('deleteUser/{id}', [\App\Http\Controllers\DashboardController::class,'deleteUser'])->name('deleteUser');
     Route::post('/updateProfile', [\App\Http\Controllers\DashboardController::class,'editProfile'])->name('profile.update');
     Route::get('/loan_application', [\App\Http\Controllers\DashboardController::class,'loan_application_page'])->name('dashboard.loan_application');
+    Route::get('/loan_organization', [\App\Http\Controllers\DashboardController::class,'loan_organizations'])->name('dashboard.loan_organizations');
 
 });
 
