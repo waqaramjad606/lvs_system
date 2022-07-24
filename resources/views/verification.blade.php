@@ -138,15 +138,16 @@
             },
             success: function (data) {
                 data =JSON.parse(data);
-                console.log(data);
-                if(data.length > 0) {
-                    $("#fname").val(data[0].fname);
-                    $("#lname").val(data[0].lname);
-                    $("#cnic").val(data[0].cnic_no);
-                    $("#phone").val(data[0].phone);
-                    $("#issue_date").val(data[0].issue_date);
-                    $("#home_address").val(data[0].home_address);
-                    $("#permanent_address").val(data[0].permanent_address);
+                // console.log(data);
+                var size = Object.keys(data).length;
+                if(size > 0) {
+                    $("#fname").val(data.fname);
+                    $("#lname").val(data.lname);
+                    $("#cnic").val(data.cnic_no);
+                    $("#phone").val(data.phone);
+                    $("#issue_date").val(data.issue_date);
+                    $("#home_address").val(data.home_address);
+                    $("#permanent_address").val(data.permanent_address);
 
                     $("#add_verify_data").show();
                     $("#myBtn").click();

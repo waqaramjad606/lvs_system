@@ -116,15 +116,15 @@
                 cnic_no: cnic_no,
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 var status='';
-                console.log(data.length);
-                if(data.length>0){
-                    if(data[0].status == 0){
+                var size = Object.keys(data).length;
+                if(size>0){
+                    if(data.status == 0){
                         status =`<p class="text-warning py-4">Your application is pending.</p>`;
                         $("#result").html(status);
                         $("#result").show();
-                    }else if(data[0].status == 1){
+                    }else if(data.status == 1){
                         status =`<p class="text-success py-4">Your application is approved.</p>`;
                         $("#result").html(status);
                         $("#result").show();

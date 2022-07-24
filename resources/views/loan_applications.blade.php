@@ -60,7 +60,14 @@
                           <th>Phone</th>
                           <th>Permanent Address</th>
                           <th>Home Address</th>
-                          <th>Apply Date</th>
+                          <th>D.O.B</th>
+                          <th>Marital Status</th>
+                          <th>First Guarantor Name</th>
+                          <th>First Guarantor Cnic</th>
+                          <th>First Guarantor Mobile NO</th>
+                          <th>Second Guarantor Name</th>
+                          <th>Second Guarantor Cnic</th>
+                          <th>Second Guarantor Mobile NO</th>
                           <th>Status</th>
                           <th>Action</th>
                       </tr>
@@ -76,7 +83,16 @@
                                 <td>{{ $application->phone }}</td>
                                 <td>{{ $application->permanent_address }}</td>
                                 <td>{{ $application->home_address }}</td>
-                                <td>{{ $application->created_at }}</td>
+
+                                <td>{{ $application->dob }}</td>
+                                <td>{{ $application->marital_status }}</td>
+                                <td>{{ $application->guarantor_name_1 }}</td>
+                                <td>{{ $application->guarantor_cnic_1 }}</td>
+                                <td>{{ $application->guarantor_phone_1 }}</td>
+                                <td>{{ $application->guarantor_name_2 }}</td>
+                                <td>{{ $application->guarantor_cnic_2 }}</td>
+                                <td>{{ $application->guarantor_phone_2 }}</td>
+
                                 <td>
                                     @if($application->status == 0)
                                         <span class="badge badge-warning">Pending</span>
@@ -120,8 +136,7 @@
         $("#loanli").addClass("active");
         $("#userTable").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
     });
 
     function acceptApplication(id) {

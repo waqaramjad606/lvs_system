@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use http\Env\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -14,11 +16,11 @@ class DashboardController extends Controller
 {
     public function admin_dashboard()
     {
-        $pending_application=Application::all()->where('status','=','0')->count();
-        $approved_application=Application::all()->where('status','=','1')->count();
-        $reject_application=Application::all()->where('status','=','2')->count();
-        $total_application=Application::all()->count();
-        return view('dashboard',compact('pending_application','approved_application','total_application','reject_application'));
+        $pending_application = Application::all()->where('status', '=', '0')->count();
+        $approved_application = Application::all()->where('status', '=', '1')->count();
+        $reject_application = Application::all()->where('status', '=', '2')->count();
+        $total_application = Application::all()->count();
+        return view('dashboard', compact('pending_application', 'approved_application', 'total_application', 'reject_application'));
     }
 
     public function user_page()
@@ -48,9 +50,9 @@ class DashboardController extends Controller
         $user->cnic_no = $request->cnic_no;
 //        Hash::make($request->new_password);
 //        $user->password = Hash::make($request->name);
-        if($user->save()){
+        if ($user->save()) {
             return response()->json('true');
-        }else{
+        } else {
             return response()->json('false');
         }
 
@@ -59,19 +61,19 @@ class DashboardController extends Controller
     public function loan_application_page()
     {
         $applications = Application::all();
-        return view('loan_applications',compact('applications'));
+        return view('loan_applications', compact('applications'));
     }
 
     public function apply_application()
     {
         $organizations = Organizations::all();
-        return view('apply',compact('organizations'));
+        return view('apply', compact('organizations'));
     }
 
     public function sub_loan_application_page()
     {
         $applications = Application::all();
-        return view('sub_loan_applications',compact('applications'));
+        return view('sub_loan_applications', compact('applications'));
     }
 
     public function submitApplication(Request $request)
@@ -84,20 +86,59 @@ class DashboardController extends Controller
         $application->issue_date = $request->input('issuedate');
         $application->home_address = $request->input('homeaddress');
         $application->permanent_address = $request->input('permanentaddress');
-//        $application->gname = $request->input('g_name');
-//        $application->guarantor_number = $request->input('guarantor_number');
 
-        $check_cnic=$request->input('cnic_no');
+        $application->dob = $request->input('dob');
+        $application->guarantor_name_1 = $request->input('gname_1');
+        $application->guarantor_cnic_1 = $request->input('g_number_1');
+        $application->guarantor_phone_1 = $request->input('g_cnic_1');
+        $application->guarantor_name_2 = $request->input('gname_2');
+        $application->guarantor_cnic_2 = $request->input('g_number_2');
+        $application->guarantor_phone_2 = $request->input('g_cnic_2');
+        $application->marital_status = $request->input('martial_status');
+        $application->organization_id = $request->input('organization_id');
 
-        $nadra_verification = Nadra_information::all()->where('cnic', '=', $check_cnic);
-        if($nadra_verification->count()>0){
-            if($application->save()){
-                return response()->json('true');
+        if ($application->save()) {
+            return response()->json('true');
+        } else {
+            return response()->json('false');
+        }
+    }
+
+    public function verify_nadra_info(Request $request)
+    {
+
+        $fname = $request->input('fname');
+        $lname = $request->input('lname');
+        $cnic_no = $request->input('cnic_no');
+        $phone = $request->input('phone');
+        $issue_date = $request->input('issuedate');
+
+        $check_cnic = $request->input('cnic_no');
+
+        $error_arr = array();
+        try {
+            $nadra_verification = Nadra_information::where('cnic', '=', $check_cnic)->first();
+
+            if (isset($nadra_verification) > 0 && $nadra_verification->count()>0) {
+                if (strcasecmp($fname, $nadra_verification->first_name) != 0) {
+                    $error_arr[] = 'invalid_first_name';
+                }
+                if (strcasecmp($lname, $nadra_verification->last_name) != 0) {
+                    $error_arr[] = 'invalid_last_name';
+                }
+
+                if (strcasecmp('AVAILABLE', $nadra_verification->criminal_record) == 0) {
+                    $error_arr[] = 'criminal_record_exist';
+                }
+
             }else{
-                return response()->json('false');
+                $error_arr=['invalid_cnic'];
             }
-        }else{
-            return response()->json('not_found');
+
+            return response()->json($error_arr);
+
+        } catch (Exception $e) {
+            dd($e->getMessage());
         }
 
 
@@ -106,7 +147,7 @@ class DashboardController extends Controller
     public function accpetApplication(Request $request)
     {
         $application = Application::find($request->id);
-        $application->status=1;
+        $application->status = 1;
         $application->save();
         return response()->json("true");
 //        return redirect()->route('dashboard.loan_application')->with('success', 'Application approved successfully');
@@ -115,7 +156,7 @@ class DashboardController extends Controller
     public function rejectApplication(Request $request)
     {
         $application = Application::find($request->id);
-        $application->status=2;
+        $application->status = 2;
         $application->save();
         return response()->json("true");
 //        return redirect()->route('dashboard.loan_application')->with('success', 'Application rejected successfully');
@@ -126,9 +167,9 @@ class DashboardController extends Controller
     {
         $user = User::find($request->id);
         $user->status = 0;
-        if($user->save()){
+        if ($user->save()) {
             return response()->json('true');
-        }else{
+        } else {
             return response()->json('false');
         }
 
@@ -138,9 +179,9 @@ class DashboardController extends Controller
     {
         $user = User::find($request->id);
         $user->status = 1;
-        if($user->save()){
+        if ($user->save()) {
             return response()->json('true');
-        }else{
+        } else {
             return response()->json('false');
         }
 
@@ -149,6 +190,6 @@ class DashboardController extends Controller
     public function loan_organizations()
     {
         $organizations = Organizations::all();
-        return view('organizations',compact('organizations'));
+        return view('organizations', compact('organizations'));
     }
 }

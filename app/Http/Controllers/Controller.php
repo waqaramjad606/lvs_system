@@ -30,7 +30,7 @@ class Controller extends BaseController
 
     public function track_application(Request $request)
     {
-        $application = Application::all()->where('cnic_no', '=', $request->cnic_no);
+        $application = Application::where('cnic_no', '=', $request->cnic_no)->first();
 //        $status=$application->status;
         return response()->json($application);
 
@@ -38,7 +38,7 @@ class Controller extends BaseController
 
     public function getVeryfication(Request $request)
     {
-        $application = Application::all()->where('cnic_no', '=', $request->cnic_no);
+        $application = Application::where('cnic_no', '=', $request->cnic_no)->first();
         if(!empty($application)){
 //            $data[]=array('fname'=> $application->fname,'lname'=>$application->lname);
             echo json_encode($application);

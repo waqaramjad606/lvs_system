@@ -30,6 +30,7 @@ Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logou
 
 Route::get('/apply', [\App\Http\Controllers\DashboardController::class,'apply_application'])->name('apply_application');
 Route::post('/postApplication', [\App\Http\Controllers\DashboardController::class,'submitApplication'])->name('postApplication');
+Route::post('/verifyNadraInformation', [\App\Http\Controllers\DashboardController::class,'verify_nadra_info'])->name('verifyNadraInformation');
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class,'admin_dashboard'])->name('dashboard');
 Route::get('/profile', [\App\Http\Controllers\DashboardController::class,'user_Profile'])->name('profile');
 Route::post('/accept_application', [\App\Http\Controllers\DashboardController::class,'accpetApplication'])->name('dashboard.accept_application');
