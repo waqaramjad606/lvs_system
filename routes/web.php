@@ -44,7 +44,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('/updateProfile', [\App\Http\Controllers\DashboardController::class,'editProfile'])->name('profile.update');
     Route::get('/loan_application', [\App\Http\Controllers\DashboardController::class,'loan_application_page'])->name('dashboard.loan_application');
     Route::get('/loan_organization', [\App\Http\Controllers\DashboardController::class,'loan_organizations'])->name('dashboard.loan_organizations');
-
+    Route::post('/blockOrganization', [\App\Http\Controllers\DashboardController::class,'blockOrganization'])->name('blockOrganization');
+    Route::post('/activeOrganization', [\App\Http\Controllers\DashboardController::class,'activeOrganization'])->name('activeOrganization');
+    Route::delete('deleteOrganization/{id}', [\App\Http\Controllers\DashboardController::class,'deleteOrganization'])->name('deleteOrganization');
+    Route::post('/addOrganization', [\App\Http\Controllers\DashboardController::class,'addNewOrganization'])->name('addOrganization');
 });
 
 Route::group(['middleware' => ['user']], function () {

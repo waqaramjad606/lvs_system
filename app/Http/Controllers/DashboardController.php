@@ -192,4 +192,50 @@ class DashboardController extends Controller
         $organizations = Organizations::all();
         return view('organizations', compact('organizations'));
     }
+
+    public function blockOrganization(Request $request)
+    {
+        $organization = Organizations::find($request->id);
+        $organization->status = 0;
+        if ($organization->save()) {
+            return response()->json('true');
+        } else {
+            return response()->json('false');
+        }
+
+    }
+
+    public function activeOrganization(Request $request)
+    {
+        $organization = Organizations::find($request->id);
+        $organization->status = 1;
+        if ($organization->save()) {
+            return response()->json('true');
+        } else {
+            return response()->json('false');
+        }
+    }
+
+    public function deleteOrganization($id)
+    {
+        $organization = Organizations::find($id);
+        $organization->delete();
+        return redirect()->route('dashboard.loan_organizations')->with('success', 'Organization deleted successfully');
+    }
+
+    public function addNewOrganization(Request $request)
+    {
+        $organization = new Organizations();
+        $image=$request->input('image');
+        $organization->name = $request->input('name');
+        $organization->location = $request->input('address');
+        $organization->type = $request->input('type');
+        $organization->img_path = "";
+
+        if ($organization->save()) {
+            return response()->json('true');
+        } else {
+            return response()->json('false');
+        }
+    }
 }

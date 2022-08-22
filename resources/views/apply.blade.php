@@ -16,20 +16,28 @@
     <link rel="stylesheet" href="{{  asset('lvs_assets/css/responsive.css') }}">
 
 </head>
-
+<style>
+    .form-select{
+    margin-left: 15% !important;
+    width: 70% !important;
+    height: 3rem !important;
+    border-radius: 25px;
+    border: 2px solid #3498db;
+        text-align: center !important;
+    }
+</style>
 <body class="main-layout">
 @include('layouts.header');
+<button class="btn btn-info" id="back_btn">Back Button</button>
 <br>
 <div class="row">
-
-    <div class="col-md-12" id="tagline"><h3 style="text-align: center;margin-top: 6px; color: white;">Enter Application
-            Detail</h3></div>
-
+    <div class="col-md-12" id="tagline">
+        <h3 style="text-align: center;margin-top: 6px; color: white;">Enter Application Detail</h3>
+    </div>
 </div>
 
 
 <div class="container">
-
     <div class="row" style="height: 100%;">
         <br>
         <p>Please provide required information in all sections as all sections are mandatory.
@@ -61,17 +69,15 @@
                     <input type="text" name="cnic_no" id="cnic_no" placeholder="Enter CNIC number" required>
                     <input type="text" name="cnic_no_1" id="cnic_no_1" placeholder="Re-Enter CNIC number" required>
                     {{--                    <label style="margin-left: 16%; font-size: 1.5rem;">Issue Date:</label>--}}
-                    <input type="date" name="issuedate" id="issuedate" placeholder="CNIC Issuance Date" required>
+                    <input type="date" name="dob_date" id="dob_date" placeholder="D.O.B" required>
                     <div class="text-center">
                         <button type="button" class="btn btn-success" onclick="verifyNadraInformation()">Verify Button</button>
                     </div>
 
                 </div>
                 <div id="apply_form_2" style="display: none;">
-                    <label style="margin-left: 15%; font-size: 1.5rem;">D.O.B</label>
-                    <input type="date" name="dob_date" id="dob_date" placeholder="D.O.B" required>
                     <input type="number" name="phone" id="phone" placeholder="Enter Phone Number" required>
-                    <select class="form-control-sm" aria-label="Default select example" id="martial_status" style="margin-left: 20%;width: 60%;">
+                    <select class="form-control-sm form-select" aria-label="Default select example" id="martial_status">
                         <option value="0">select</option>
                         <option value="single">single</option>
                         <option value="married">Married</option>
@@ -83,18 +89,18 @@
                 {{--<input type="submit" value="Submit & Next" style="color:black;">--}}
                 <div id="apply_form_3" style="display: none;">
                     <input type="text" id="gname_1" placeholder="Enter first guarantor Name" required>
-                    <input type="number" id="g_number_1" placeholder="Enter first guarantor cnic no" required>
-                    <input type="number" id="g_cnic_1" placeholder="Enter first guarantor mobile no" required>
+                    <input type="text" id="g_number_1" placeholder="Enter first guarantor cnic no" required>
+                    <input type="text" id="g_cnic_1" placeholder="Enter first guarantor mobile no" required>
 
                     <input type="text" id="gname_2" placeholder="Enter second guarantor Name" required>
-                    <input type="number" id="g_number_2" placeholder="Enter second guarantor cnic no" required>
-                    <input type="number" id="g_cnic_2" placeholder="Enter second guarantor mobile no" required>
+                    <input type="text" id="g_number_2" placeholder="Enter second guarantor cnic no" required>
+                    <input type="text" id="g_cnic_2" placeholder="Enter second guarantor mobile no" required>
                     <input type="button" value="Submit & Next" style="color:black;" id="apply_form_3_btn">
                 </div>
 
                 <div id="apply_form_4" style="display: none;">
 
-                    <select class="form-control-sm" aria-label="Default select example" id="organization_id" style="margin-left: 20%;width: 60%;">
+                    <select class="form-control-sm form-select" aria-label="Default select example" id="organization_id" >
                         <option value="0">select loan organization</option>
                         @foreach($organizations as $organization)
                             <option value="{{ $organization->id }}">{{ $organization->name }}</option>
@@ -131,6 +137,20 @@
 <script src="{{ asset('lvs_assets/js/bootstrap.bundle.min.js') }}"></script>
 
 <script>
+    var dob='';
+    $("#dob_date").change(function (){
+        dob=$("#dob_date").val();
+
+        var mydate = dob.split('-');
+        var year = mydate[0];
+        var month = mydate[1];
+        var day = mydate[2];
+        if(!isOverEighteen(year,month,day)){
+            console.log("<18");
+            swal("Alert", 'Age must greater then 18 years', 'info');
+            return;
+        }
+    });
     function verifyNadraInformation(){
         var fname = $("#fname").val();
         var lname = $("#lname").val();
@@ -139,8 +159,6 @@
         var issuedate = $("#issuedate").val();
         var letters = /^[A-Za-z]+$/;
         validRegEx = /^[^\\\/&]*$/;
-
-
         $.ajax({
             url: "{{ route('verifyNadraInformation') }}",
             type: "POST",
@@ -210,7 +228,7 @@
         var cnic_no_1 = $("#cnic_no_1").val();
         var issuedate = $("#issuedate").val();
 
-        var dob=$("#dob_date").val();
+
         var phone=$("#phone").val();
         var homeaddress=$("#homeaddress").val();
         var permanentaddress=$("#permanentaddress").val();
@@ -227,15 +245,7 @@
         var letters = /^[A-Za-z]+$/;
         validRegEx = /^[^\\\/&]*$/
 
-        var mydate = dob.split('-');
-        var year = mydate[0];
-        var month = mydate[1];
-        var day = mydate[2];
-        if(!isOverEighteen(year,month,day)){
-            console.log("<18");
-            swal("Alert", 'Age must greater then 18 years', 'info');
-            return;
-        }
+
 
         if (cnic_no.length > 13) {
             swal("Alert", 'CNIC length cannot be greater then 13 digits', 'info');
@@ -269,7 +279,7 @@
                 fname: fname,
                 lname: lname,
                 cnic_no: cnic_no,
-                issuedate: issuedate,
+                issuedate: '',
                 phone: phone,
                 homeaddress: homeaddress,
                 permanentaddress: permanentaddress,
@@ -297,7 +307,6 @@
             }
         });
     });
-
     function isOverEighteen(year, month, day) {
         var now = parseInt(new Date().toISOString().slice(0, 10).replace(/-/g, ''));
         var dob = year * 10000 + month * 100 + day * 1; // Coerces strings to integers
@@ -320,6 +329,33 @@
         $("#apply_form_3").hide();
         $("#apply_form_4").show();
         $("#heading_text").text('Organization Information');
+    });
+
+
+    $("#back_btn").click(function(){
+        var form1=$('#apply_form_1').is(':visible');
+        var form2=$('#apply_form_2').is(':visible');
+        var form3=$('#apply_form_3').is(':visible');
+        var form4=$('#apply_form_4').is(':visible');
+        if(form1)
+        {
+            alert('1');
+           // $("#back_btn").attr('disabled',true);
+        }else if(form2 && !form3){
+            alert('2');
+            $("#apply_form_1").show();
+            $("#apply_form_2").hide();
+        }else if(form3 && !form2){
+            alert('3');
+            $("#apply_form_3").hide();
+            $("#apply_form_2").show();
+        }else if(form4 && !form3){
+            alert('4');
+            $("#apply_form_4").hide();
+            $("#apply_form_3").show();
+        }else{
+            alert('5');
+        }
     });
 
 </script>
