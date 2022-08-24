@@ -87,6 +87,7 @@ class DashboardController extends Controller
         $application->home_address = $request->input('homeaddress');
         $application->permanent_address = $request->input('permanentaddress');
 
+        $application->loan_duration = $request->input('loan_duration');
         $application->dob = $request->input('dob');
         $application->guarantor_name_1 = $request->input('gname_1');
         $application->guarantor_cnic_1 = $request->input('g_number_1');
@@ -120,6 +121,7 @@ class DashboardController extends Controller
             $nadra_verification = Nadra_information::where('cnic', '=', $check_cnic)->first();
 
             if (isset($nadra_verification) > 0 && $nadra_verification->count()>0) {
+
                 if (strcasecmp($fname, $nadra_verification->first_name) != 0) {
                     $error_arr[] = 'invalid_first_name';
                 }
@@ -129,6 +131,11 @@ class DashboardController extends Controller
 
                 if (strcasecmp('AVAILABLE', $nadra_verification->criminal_record) == 0) {
                     $error_arr[] = 'criminal_record_exist';
+                }
+
+                if(strcasecmp($fname, $nadra_verification->first_name) == 0 && strcasecmp($lname, $nadra_verification->last_name) ==0 && strcasecmp('AVAILABLE', $nadra_verification->criminal_record) != 0){
+                    $nadra_verification->is_verify=1;
+                    $nadra_verification->save();
                 }
 
             }else{

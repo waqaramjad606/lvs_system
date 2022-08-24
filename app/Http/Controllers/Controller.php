@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nadra_information;
 use App\Models\User;
 use App\Models\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -38,7 +39,7 @@ class Controller extends BaseController
 
     public function getVeryfication(Request $request)
     {
-        $application = Application::where('cnic_no', '=', $request->cnic_no)->first();
+        $application = Nadra_information::where('cnic', '=', $request->cnic_no)->first();
         if(!empty($application)){
 //            $data[]=array('fname'=> $application->fname,'lname'=>$application->lname);
             echo json_encode($application);

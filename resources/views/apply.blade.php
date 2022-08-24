@@ -25,6 +25,54 @@
     border: 2px solid #3498db;
         text-align: center !important;
     }
+
+    .contact-div{
+        position: fixed;
+        bottom: 0rem;
+        right: 0rem;
+        z-index: 999999;
+
+    }
+    .contact-icon{
+        width:60px !important;
+        height: 50px !important;
+        background: #505ea7;
+        border-radius: 50%;
+        bottom: 0;
+        right: 0;
+        color: #fff;
+        font-size: 48px;
+        text-align: center;
+        padding: 5px 21px;
+    }
+    a.whatsapp_btn_link{
+        width: 250px;
+        text-decoration: none;
+        color: #fff;
+        background:#505ea7;
+        border-radius: 50px;
+        padding: 1.2rem;
+    }
+    a.whatsapp_btn_link_booking{
+        width: 250px;
+        text-decoration: none;
+        color: #fff;
+        background: #505ea7;;
+        border-radius: 50px;
+        padding:1.5rem 1.2rem !important;
+    }
+    .contact-icon-booking{
+        width:60px !important;
+        height: 50px !important;
+        background: #505ea7;
+        border-radius: 50%;
+        bottom:6.5rem;
+        right: 0;
+        color: #fff;
+        font-size: 40px;
+        text-align: center;
+        padding: 10px 24px;
+    }
 </style>
 <body class="main-layout">
 @include('layouts.header');
@@ -76,9 +124,19 @@
 
                 </div>
                 <div id="apply_form_2" style="display: none;">
+                    <select class="form-control-sm form-select" aria-label="Default select example" id="loan_duration">
+                        <option value="0">Loan Tenure</option>
+                        <option value="6 month">6-Months</option>
+                        <option value="1 years">1-Year</option>
+                        <option value="1.5 years">1.5-Year</option>
+                        <option value="2 years">2-Years</option>
+                        <option value="3 years">3-Years</option>
+                        <option value="4 years">4-Years</option>
+                        <option value="5 years">5-Years</option>
+                    </select>
                     <input type="number" name="phone" id="phone" placeholder="Enter Phone Number" required>
                     <select class="form-control-sm form-select" aria-label="Default select example" id="martial_status">
-                        <option value="0">select</option>
+                        <option value="0">Relationship Status</option>
                         <option value="single">single</option>
                         <option value="married">Married</option>
                     </select>
@@ -103,7 +161,9 @@
                     <select class="form-control-sm form-select" aria-label="Default select example" id="organization_id" >
                         <option value="0">select loan organization</option>
                         @foreach($organizations as $organization)
-                            <option value="{{ $organization->id }}">{{ $organization->name }}</option>
+                            @if($organization->status==1 || $organization->status=='1')
+                                <option value="{{ $organization->id }}">{{ $organization->name }}</option>
+                            @endif
                         @endforeach
                     </select>
 
@@ -121,6 +181,19 @@
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 @include('layouts.footer');
+<div class="contact-div ">
+    <p class="text-right" style="margin-bottom: 3rem;">
+        <a class="contact-icon" href="tel:+923086407763">
+            <i class="fa fa-phone" style="font-size:48px;"></i>
+        </a>
+    </p>
+    <p class="text-right" style="margin-bottom: 2.5rem;">
+        <a class="whatsapp_btn_link_booking mt-5" target="_blank" href="https://wa.me/+923086407763">
+            <img class="image_whatsapp" src="{{ asset('lvs_assets/images/whatsapp-logo-64.png') }}">
+            <span class="">How can I help you?</span>
+        </a>
+    </p>
+</div>
 <div class="cpy">
     <div class="container">
         <div class="row">
@@ -229,6 +302,7 @@
         var issuedate = $("#issuedate").val();
 
 
+        var loan_duration=$("#loan_duration").val();
         var phone=$("#phone").val();
         var homeaddress=$("#homeaddress").val();
         var permanentaddress=$("#permanentaddress").val();
@@ -291,8 +365,8 @@
                 g_cnic_1:g_cnic_1,
                 g_cnic_2:g_cnic_2,
                 martial_status:martial_status,
-                martial_status:martial_status,
                 organization_id:organization_id,
+                loan_duration:loan_duration
             },
             success: function (data) {
                 console.log(data);
@@ -339,22 +413,16 @@
         var form4=$('#apply_form_4').is(':visible');
         if(form1)
         {
-            alert('1');
            // $("#back_btn").attr('disabled',true);
         }else if(form2 && !form3){
-            alert('2');
             $("#apply_form_1").show();
             $("#apply_form_2").hide();
         }else if(form3 && !form2){
-            alert('3');
             $("#apply_form_3").hide();
             $("#apply_form_2").show();
-        }else if(form4 && !form3){
-            alert('4');
+        }else{
             $("#apply_form_4").hide();
             $("#apply_form_3").show();
-        }else{
-            alert('5');
         }
     });
 

@@ -33,6 +33,7 @@
                 <div class="card-header" style="color: black; font-size: 20px; text-align: center;">
                     Enter Verification Details
                 </div>
+                <div class="text-center" id="verify_data_1" style="display: none;"></div>
                 <form id="verificationForm">
                     <div class="card-body" style="align-items: center">
                         <input type="number" placeholder="Enter CNIC Number" id="v_cnic_no">
@@ -53,7 +54,6 @@
 
 {{--model--}}
 <div id="myModal" class="modal">
-
     <div class="modal-content">
         <span class="close">&times;</span>
         <h1>Application Detail</h1>
@@ -78,16 +78,12 @@
             <label for="email"><b>Permanent Address</b></label>
             <input type="text" class="form-control" name="permanent_address" id="permanent_address" value="">
         </div>
-
-        <div id="verify_data_1" style="display: none;"></div>
-
     </div>
-
 </div>
-
 <br><br><br><br><br><br><br>
 
 @include('layouts.footer');
+
 <div class="cpy">
     <div class="container">
         <div class="row">
@@ -98,28 +94,28 @@
     </div>
 </div>
 
-<script>
-    var modal = document.getElementById("myModal");
+{{--<script>--}}
+{{--    var modal = document.getElementById("myModal");--}}
 
-    var btn = document.getElementById("myBtn");
+{{--    var btn = document.getElementById("myBtn");--}}
 
-    var span = document.getElementsByClassName("close")[0];
+{{--    var span = document.getElementsByClassName("close")[0];--}}
 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
+{{--    btn.onclick = function () {--}}
+{{--        modal.style.display = "block";--}}
+{{--    }--}}
 
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+{{--    span.onclick = function () {--}}
+{{--        modal.style.display = "none";--}}
+{{--    }--}}
 
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+{{--    window.onclick = function (event) {--}}
+{{--        if (event.target == modal) {--}}
+{{--            modal.style.display = "none";--}}
+{{--        }--}}
+{{--    }--}}
 
-    </script>
+{{--    </script>--}}
     <script src="{{ asset('lvs_assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('lvs_assets/js/plugin.js') }}"></script>
 <script src="{{ asset('lvs_assets/js/custom.js') }}"></script>
@@ -137,24 +133,23 @@
                 cnic_no: cnic_no,
             },
             success: function (data) {
+                $("#verify_data_1").html('');
                 data =JSON.parse(data);
-                // console.log(data);
+                console.log(data);
                 var size = Object.keys(data).length;
                 if(size > 0) {
-                    $("#fname").val(data.fname);
-                    $("#lname").val(data.lname);
-                    $("#cnic").val(data.cnic_no);
-                    $("#phone").val(data.phone);
-                    $("#issue_date").val(data.issue_date);
-                    $("#home_address").val(data.home_address);
-                    $("#permanent_address").val(data.permanent_address);
+                    if(data.is_verify=='1'||data.is_verify==1){
+                        $("#verify_data_1").append(`<h1 class="text-success">Person is verified by nadra</h1>`);
+                        $("#verify_data_1").show();
 
-                    $("#add_verify_data").show();
-                    $("#myBtn").click();
+                    }else{
+                        $("#verify_data_1").append(`<h1 class="text-danger">Person is not verified by nadra.</h1>`);
+                        $("#verify_data_1").show();
+                    }
+
                 } else {
                     $("#verify_data_1").append(`<h1 class="text-danger">No Information found against this cnic number.</h1>`);
                     $("#verify_data_1").show();
-                    $("#myBtn").click();
                 }
 
             }

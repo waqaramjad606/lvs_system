@@ -260,7 +260,6 @@
     }//block user
 
     $( "#addOrganizationForm" ).submit(function( event ) {
-
         event.preventDefault();
         var name=$("#organizatonName").val();
         var address=$("#organizatonAddress").val();

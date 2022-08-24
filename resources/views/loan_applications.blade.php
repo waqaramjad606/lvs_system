@@ -62,6 +62,7 @@
                           <th>Home Address</th>
                           <th>D.O.B</th>
                           <th>Marital Status</th>
+                          <th>Loan Tenure</th>
                           <th>First Guarantor Name</th>
                           <th>First Guarantor Cnic</th>
                           <th>First Guarantor Mobile NO</th>
@@ -86,6 +87,7 @@
 
                                 <td>{{ $application->dob }}</td>
                                 <td>{{ $application->marital_status }}</td>
+                                <td>{{ $application->loan_duration }}</td>
                                 <td>{{ $application->guarantor_name_1 }}</td>
                                 <td>{{ $application->guarantor_cnic_1 }}</td>
                                 <td>{{ $application->guarantor_phone_1 }}</td>
